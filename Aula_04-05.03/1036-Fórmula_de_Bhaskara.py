@@ -9,9 +9,9 @@ c = float(C)
 delta = (b ** 2) - 4 * a * c
 
 if a == 0:
-    print ("Impossível calcular")
+    print ("Impossivel calcular")
 elif delta < 0:
-    print ("Impossível calcular")
+    print ("Impossivel calcular")
 else: 
     r1 = (-b + math.sqrt(delta)) / (2 * a)
     r2 = (-b - math.sqrt(delta)) / (2 * a)
