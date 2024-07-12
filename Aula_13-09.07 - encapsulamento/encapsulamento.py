@@ -1,6 +1,6 @@
 class Triangulo:               # entidade
     def __init__(self):        # construtor
-        self.__b = 1             # atibutos - atributos de uma instância (objeto)
+        self.__b = 1           # atibutos - atributos de uma instância (objeto)
         self.__h = 1
 
     def set_base(self, valor):
