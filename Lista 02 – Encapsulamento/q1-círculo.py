@@ -13,3 +13,7 @@ class Circulo():
     
     def calc_area(self):
         return 3.14 * self.__r ** 2
+
+class UI:
+    @staticmethod
+    
