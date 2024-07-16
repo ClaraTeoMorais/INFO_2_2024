@@ -3,7 +3,7 @@ class viagem():
         self.__d = 1
         self.__t = 1
 
-    def set_distancia(valor,self):
+    def set_distancia(self,valor):
         if valor > 0: 
             self.__d = valor
         else:
@@ -12,7 +12,7 @@ class viagem():
     def get_distancia(self):
         return self.__d
     
-    def set_tempo(valor,self):
+    def set_tempo(self,valor):
         if valor > 0:
             self.__t = valor
         else: 
@@ -45,9 +45,9 @@ class UI():
     def v():
         velocidade = viagem()
         velocidade.set_distancia(float(input("Digite a distância percorrida (em km): ")))
-        velocidade.set_tempo(float(input("Digite o tempo que a viagem durou(em horas): ")))
+        velocidade.set_tempo(float(input("Digite o tempo que a viagem durou (em horas): ")))
         print(f"A diatância é = {velocidade.get_distancia()} km")
-        print(f"O tempo é = {velocidade.get_tempo()}h")
-        print(f"\nVelocidade Média = {velocidade.velocidade_media():.2f}km/h")
+        print(f"O tempo é = {velocidade.get_tempo()} h")
+        print(f"\nVelocidade Média = {velocidade.velocidade_media():.2f} km/h")
 
 UI.verificar_opc()
