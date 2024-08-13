@@ -41,7 +41,11 @@ class Paciente:
 
     def idade(self):
         return self.__nasc - datetime.now()
+    
+    def __str__(self):
+        print(f"{self.__n}, {self.__c}, {self.__t}, {self.__nasc}")
 
 class UI:
+    
     
 
