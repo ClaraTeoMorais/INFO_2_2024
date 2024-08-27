@@ -72,11 +72,14 @@ class NPaciente:
       json.dump(cls.pacientes, arquivo, default = vars)
 
     @classmethod
-    def aniversariantes(cls,nc):
+    def aniversariantes(cls,mes):
         cls.abrir()
-        aniversariantes = []
-        for nc in aniversariantes:
-          if nc.nasc.month == m
+        niver = []
+        cls.nc = datetime.strptime(cls,"%d,%m,%Y")
+        for i in aniversariantes:
+          if cls.nc.month == mes:
+            niver.append(i)
+        return print(niver)
 
 
 class UI:
@@ -128,7 +131,10 @@ class UI:
 
     @staticmethod
     def paciente_aniversariantes():
-      print("Selecione um mês para ver a lista de aniversariantes (mm): ")
-      Paciente.aniversariantes()
+      m = input("Selecione um mês para ver a lista de aniversariantes (mm): ")
+      m = Paciente(m)
+      Paciente.aniversariantes(m)
+
+
 
 UI.main()
