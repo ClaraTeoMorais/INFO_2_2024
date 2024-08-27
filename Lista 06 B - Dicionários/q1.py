@@ -90,24 +90,13 @@ class Clientes:
 
 
 class Serviços:
-    objetos = []
-    @classmethod
-    def inserir (cls, obj):
-        cls.abrir()
-        m = 0
-        for c in cls.objetos:
-            if c.id > m:
-                m = c.id
-        obj.id = m + 1
-        cls.objetos.append(obj)
-        cls.salvar()
+  objetos = []
+  @classmethod
+  def inserir(cls,obj):
+    cls.abrir()
+    x = 0
 
-    @classmethod
-    def listar_id(cls, id):
-        cls.abrir()
-        for c in cls.objetos:
-           if c.id == id:
-              return c
+
         
     
 
