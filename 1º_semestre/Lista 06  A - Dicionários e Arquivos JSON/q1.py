@@ -14,5 +14,3 @@ class Clientes:
     @classmethod
     def inserir(cls,obj):
         cls.objetos.append(obj)
-    @classmethod
-    def listar():
