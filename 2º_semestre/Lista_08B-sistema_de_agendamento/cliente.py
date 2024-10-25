@@ -53,15 +53,18 @@ class Clientes:
         return cls.objetos
     
     @classmethod
-    def salvar(cls):
-        with open("cliente.json", mode="w") as arquivo:
-            json.dump(cls.objetos, arquivo, defalt = vars)
-    
-    @classmethod
     def abrir(cls):
         cls.objetos = []
-        with open("cliente.json", mode="r") as arquivo:
-            texto = json.load(arquivo)
-            for obj in texto:
-                c = Cliente(obj["id"], obj["nome"], obj["email"], obj["phone"])
-                cls.objetos.append(c)
+        try:
+            with open("cliente.json", mode="r") as arquivo:  
+                texto = json.load(arquivo)
+                for obj in texto:   
+                    c = Cliente(obj["id"], obj["nome"], obj["email"], obj["phone"])
+                    cls.objetos.append(c)
+        except FileNotFoundError:
+            pass
+
+    @classmethod
+    def salvar(cls):
+        with open("cliente.json", mode="w") as arquivo:
+            json.dump(cls.objetos, arquivo, default = vars)

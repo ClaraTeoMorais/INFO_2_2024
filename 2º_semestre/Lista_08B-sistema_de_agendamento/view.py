@@ -4,7 +4,7 @@ class View:
     def cliente_listar():
         return Clientes.listar()
     
-    def cliente_inserir(id, nome, email, phone):
+    def cliente_inserir(nome, email, phone):
         c = Cliente(0, nome, email, phone)
         Clientes.inserir(c)
 
