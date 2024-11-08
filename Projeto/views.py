@@ -27,9 +27,10 @@ class View:
         c = Cliente(id, "", "", "", "")
         Clientes.excluir(c)    
 
-    def cliente_autenticar(email, senha):
+    def cliente_autenticar(email, senha, senha2):
         for c in View.cliente_listar():
-            if c.email == email and c.senha == senha:
+            senha2 = senha
+            if c.email == email and c.senha == senha and c.senha == senha2:
                 return {"id" : c.id, "nome" : c.nome }
         return None
 
