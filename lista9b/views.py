@@ -27,11 +27,10 @@ class View:
         c = Cliente(id, "", "", "", "")
         Clientes.excluir(c)    
 
-    def cliente_autenticar(email, senha, senha2):
+    def cliente_autenticar(email, senha):
         for c in View.cliente_listar():
-            senha2 = senha
-            if c.email == email and c.senha == senha and c.senha == senha2:
-                return {"id" : c.id, "nome" : c.nome }
+            if c.email == email and c.senha == senha:
+                return {"id" : c.id, "nome" : c.nome}
         return None
 
     def horario_inserir(data, confirmado, id_cliente, id_servico):

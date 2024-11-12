@@ -19,7 +19,13 @@ class ManterClienteUI:
         else:    
             #for obj in clientes: st.write(obj)
             dic = []
-            for obj in clientes: dic.append(obj.__dict__)
+            for obj in clientes:
+                dic.append({
+                    "id": obj.id,
+                    "nome": obj.nome,
+                    "email": obj.email,
+                    "fone": obj.fone
+                })
             df = pd.DataFrame(dic)
             st.dataframe(df)
 
@@ -61,3 +67,5 @@ class ManterClienteUI:
                 st.success("Cliente excluído com sucesso")
                 time.sleep(2)
                 st.rerun()
+
+
