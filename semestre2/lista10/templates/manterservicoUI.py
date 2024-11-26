@@ -28,10 +28,13 @@ class ManterServicoUI:
         valor = st.text_input("Informe o valor (R$)")
         duracao = st.text_input("Informe a duração (minutos)")
         if st.button("Inserir"):
-            View.servico_inserir(descricao, float(valor), int(duracao))
-            st.success("Servico inserido com sucesso")
-            time.sleep(2)
-            st.rerun()
+            try:
+                View.servico_inserir(descricao, float(valor), int(duracao))
+                st.success("Servico inserido com sucesso")
+                time.sleep(2)
+                st.rerun()
+            except ValueError:
+                st.write("Valor e/ou duração inválido")
 
     def atualizar():
         servicos = View.servico_listar()
@@ -55,7 +58,11 @@ class ManterServicoUI:
         else:
             op = st.selectbox("Exclusão de serviço", servicos)
             if st.button("Excluir"):
-                View.servico_excluir(op.id)
-                st.success("Serviço excluído com sucesso")
-                time.sleep(2)
-                st.rerun()
+                try:
+                    View.servico_excluir(op.id)
+                    st.success("Serviço excluído com sucesso")
+                    time.sleep(2)
+                    st.rerun()
+                except ValueError:
+                    st.write("Há um horário agendado para este serviço")
+

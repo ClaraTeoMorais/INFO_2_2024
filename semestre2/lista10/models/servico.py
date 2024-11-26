@@ -3,69 +3,114 @@ import json
 # Modelo
 class Servico:
   def __init__(self, id, descricao, valor, duracao):
-    self.id = id
-    self.descricao = descricao
-    self.valor = valor
-    self.duracao = duracao
+    self.__id = id
+    self.__descricao = descricao
+    if descricao == "": 
+      raise ValueError()
+    self.__valor = valor
+    if valor == "" or valor <= 0: 
+      raise ValueError()
+    self.__duracao = duracao
+    if duracao == "" or duracao <= 0: 
+      raise ValueError()
+
+  def set_id(self, c):
+    if c != "":
+      self.__id = c
+    else:
+      raise ValueError()
+
+  def get_id(self):
+    return self.__id
+
+  def set_descricao(self, c):
+    if c != "":
+      self.__descricao = c
+    else:
+      raise ValueError()
+
+  def get_descricao(self):
+    return self.__descricao
+
+  def set_valor(self, c):
+    if c != "" or c > 0:
+      self.__valor = c
+    else:
+      raise ValueError()
+
+  def get_valor(self):
+    return self.__valor
+
+  def set_duracao(self, c):
+    if c != "" or c > 0:
+      self.__duracao = c
+    else:
+      raise ValueError()
+
+  def get_duracao(self):
+    return self.__duracao
+
   def __str__(self):
-    return f"{self.id} - {self.descricao} - R$ {self.valor:.2f} - {self.duracao} min"
+    return f"{self.__id} - {self.__descricao} - R$ {self.__valor:.2f} - {self.__duracao} min"
 
 # Persistência
 class Servicos:
   objetos = []    # atributo estático
 
   @classmethod
-  def inserir(cls, obj):
-    cls.abrir()
+  def inserir(self, obj):
+    self.abrir()
     m = 0
-    for c in cls.objetos:
-      if c.id > m: m = c.id
-    obj.id = m + 1
-    cls.objetos.append(obj)
-    cls.salvar()
+    for c in self.objetos:
+      if c.get_id() > m: 
+        m = c.get_id()
+    obj.self.__id = m + 1
+    self.objetos.append(obj)
+    self.salvar()
 
   @classmethod
-  def listar_id(cls, id):
-    cls.abrir()
-    for c in cls.objetos:
-      if c.id == id: return c
+  def listar_id(self, id):
+    self.abrir()
+    for c in self.objetos:
+      if c.get_id() == id: 
+        return c
     return None  
   
   @classmethod
-  def atualizar(cls, obj):
-    c = cls.listar_id(obj.id)
+  def atualizar(self, obj):
+    c = self.listar_id(obj.self.__id)
     if c != None:
-      c.descricao = obj.descricao
-      c.valor = obj.valor
-      c.duracao = obj.duracao
-      cls.salvar()
+      c.self.__descricao = obj.self.__descricao
+      c.self.__valor = obj.self.__valor
+      c.self.__duracao = obj.self.__duracao
+      self.salvar()
 
   @classmethod
-  def excluir(cls, obj):
-    c = cls.listar_id(obj.id)
+  def excluir(self, obj):
+    c = self.listar_id(obj.self.__id)
     if c != None:
-      cls.objetos.remove(c)
-      cls.salvar()
+      self.objetos.remove(c)
+      self.salvar()
   
   @classmethod
-  def listar(cls):
-    cls.abrir()
-    return cls.objetos
+  def listar(self):
+    self.abrir()
+    return self.objetos
 
   @classmethod
-  def salvar(cls):
+  def salvar(self):
     with open("servicos.json", mode="w") as arquivo:   # w - write
-      json.dump(cls.objetos, arquivo, default = vars)
+      json.dump(self.objetos, arquivo, default = vars)
 
   @classmethod
-  def abrir(cls):
-    cls.objetos = []
+  def abrir(self):
+    self.objetos = []
     try:
       with open("servicos.json", mode="r") as arquivo:   # r - read
         texto = json.load(arquivo)
         for obj in texto:   
           c = Servico(obj["id"], obj["descricao"], obj["valor"], obj["duracao"])
-          cls.objetos.append(c)
+          self.objetos.append(c)
     except FileNotFoundError:
       pass
 

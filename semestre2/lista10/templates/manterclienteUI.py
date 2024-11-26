@@ -19,7 +19,8 @@ class ManterClienteUI:
         else:    
             #for obj in clientes: st.write(obj)
             dic = []
-            for obj in clientes: dic.append(obj.__dict__)
+            for obj in clientes: 
+                dic.append(obj.__dict__)
             df = pd.DataFrame(dic)
             st.dataframe(df)
 
@@ -29,10 +30,13 @@ class ManterClienteUI:
         fone = st.text_input("Informe o fone")
         senha = st.text_input("Informe a senha", type="password")
         if st.button("Inserir"):
-            View.cliente_inserir(nome, email, fone, senha)
-            st.success("Cliente inserido com sucesso")
-            time.sleep(2)
-            st.rerun()
+            try: 
+                View.cliente_inserir(nome, email, fone, senha)
+                st.success("Cliente inserido com sucesso")
+                time.sleep(2)
+                st.rerun()
+            except ValueError:
+                st.write("Email já cadastrado")
 
     def atualizar():
         clientes = View.cliente_listar()
@@ -45,10 +49,13 @@ class ManterClienteUI:
             fone = st.text_input("Informe o novo fone", op.fone)
             senha = st.text_input("Informe a nova senha", op.senha, type="password")
             if st.button("Atualizar"):
-                View.cliente_atualizar(op.id, nome, email, fone, senha)
-                st.success("Cliente atualizado com sucesso")
-                time.sleep(2)
-                st.rerun()
+                try:
+                    View.cliente_atualizar(op.id, nome, email, fone, senha)
+                    st.success("Cliente atualizado com sucesso")
+                    time.sleep(2)
+                    st.rerun()
+                except ValueError:
+                    st.write("Email já cadastrado")
 
     def excluir():
         clientes = View.cliente_listar()
@@ -57,7 +64,11 @@ class ManterClienteUI:
         else:
             op = st.selectbox("Exclusão de cliente", clientes)
             if st.button("Excluir"):
-                View.cliente_excluir(op.id)
-                st.success("Cliente excluído com sucesso")
-                time.sleep(2)
-                st.rerun()
+                try:
+                    View.cliente_excluir(op.id)
+                    st.success("Cliente excluído com sucesso")
+                    time.sleep(2)
+                    st.rerun()
+                except ValueError:
+                    st.write("Este cliente já possui um horário na agenda. Não pode ser excluído")
+
