@@ -78,7 +78,7 @@ class Clientes:
     for c in self.objetos:
       if c.get_id() > m: 
         m = c.get_id()
-    obj.self.__id = m + 1
+    obj.id = m + 1
     self.objetos.append(obj)
     self.salvar()
 
@@ -92,17 +92,17 @@ class Clientes:
   
   @classmethod
   def atualizar(self, obj):
-    c = self.listar_id(obj.self.__id)
+    c = self.listar_id(obj.id)
     if c != None:
-      c.self.__nome = obj.self.__nome
-      c.self.__email = obj.self.__email
-      c.self.__fone = obj.self.__fone
-      c.self.__senha = obj.self.__senha
+      c.self.__nome = obj.nome
+      c.self.__email = obj.email
+      c.self.__fone = obj.fone
+      c.self.__senha = obj.senha
       self.salvar()
 
   @classmethod
   def excluir(self, obj):
-    c = self.listar_id(obj.self.__id)
+    c = self.listar_id(obj.id)
     if c != None:
       self.objetos.remove(c)
       self.salvar()

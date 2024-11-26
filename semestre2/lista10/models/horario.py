@@ -75,7 +75,7 @@ class Horarios:
     for c in self.objetos:
       if c.get_id() > m: 
         m = c.get_id()
-    obj.self.__id = m + 1
+    obj.id = m + 1
     self.objetos.append(obj)
     self.salvar()
 
@@ -89,17 +89,17 @@ class Horarios:
   
   @classmethod
   def atualizar(self, obj):
-    c = self.listar_id(obj.self.__id)
+    c = self.listar_id(obj.id)
     if c != None:
       c.self.__data = obj.self.__data
-      c.self.__confirmado = obj.self.__confirmado
-      c.self.__id_cliente = obj.self.__id_cliente
-      c.self.__id_servico = obj.self.__id_servico
+      c.self.__confirmado = obj.confirmado
+      c.self.__id_cliente = obj.id_cliente
+      c.self.__id_servico = obj.id_servico
       self.salvar()
 
   @classmethod
   def excluir(self, obj):
-    c = self.listar_id(obj.self.__id)
+    c = self.listar_id(obj.id)
     if c != None:
       self.objetos.remove(c)
       self.salvar()

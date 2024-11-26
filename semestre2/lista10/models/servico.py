@@ -64,7 +64,7 @@ class Servicos:
     for c in self.objetos:
       if c.get_id() > m: 
         m = c.get_id()
-    obj.self.__id = m + 1
+    obj.id = m + 1
     self.objetos.append(obj)
     self.salvar()
 
@@ -78,16 +78,16 @@ class Servicos:
   
   @classmethod
   def atualizar(self, obj):
-    c = self.listar_id(obj.self.__id)
+    c = self.listar_id(obj.id)
     if c != None:
-      c.self.__descricao = obj.self.__descricao
-      c.self.__valor = obj.self.__valor
-      c.self.__duracao = obj.self.__duracao
+      c.self.__descricao = obj.descricao
+      c.self.__valor = obj.valor
+      c.self.__duracao = obj.duracao
       self.salvar()
 
   @classmethod
   def excluir(self, obj):
-    c = self.listar_id(obj.self.__id)
+    c = self.listar_id(obj.id)
     if c != None:
       self.objetos.remove(c)
       self.salvar()
