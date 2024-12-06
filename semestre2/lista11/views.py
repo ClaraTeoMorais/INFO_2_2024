@@ -9,7 +9,7 @@ class View:
     def cliente_admin():
         for c in View.cliente_listar():
             if c.email == "admin": return
-        View.cliente_inserir("admin", "admin", "1234", "1234")
+        View.cliente_inserir("admin", "admin", "1234", "1234", "admin")
 
     def cliente_inserir(nome, email, fone, senha, id_perfil):
         c = Cliente(0, nome, email, fone, senha, id_perfil)
@@ -26,7 +26,7 @@ class View:
         Clientes.atualizar(c)
 
     def cliente_excluir(id):
-        c = Cliente(id, "", "", "", "")
+        c = Cliente(id, "", "", "", "", "")
         Clientes.excluir(c)    
 
     def cliente_autenticar(email, senha):
@@ -51,7 +51,8 @@ class View:
         horarios = View.horario_listar()
         disponiveis = []
         for h in horarios:
-            if h.data >= datetime.now() and h.id_cliente == None: disponiveis.append(h)
+            if h.data >= datetime.now() and h.id_cliente == None: 
+                disponiveis.append(h)
         return disponiveis   
 
     def horario_atualizar(id, data, confirmado, id_cliente, id_servico, id_profissional):
@@ -76,7 +77,7 @@ class View:
         x = di
         while x <= df:
             #cadastrar o horário x
-            View.horario_inserir(x, False, None, None)
+            View.horario_inserir(x, False, None, None, None)
             #passar para o próximo horário
             x = x + d
 

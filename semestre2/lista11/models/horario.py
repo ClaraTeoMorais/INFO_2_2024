@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+from models.crud import CRUD
 
 class Horario:
     def __init__(self, id, data):
@@ -21,59 +22,24 @@ class Horario:
       dic["id_profissional"] = self.id_profissional
       return dic    
 
-class Horarios:
-  objetos = []    # atributo estático
+class Horarios(CRUD):
 
-  @classmethod
-  def inserir(cls, obj):
-    cls.abrir()
-    m = 0
-    for c in cls.objetos:
-      if c.id > m: 
-        m = c.id
-    obj.id = m + 1
-    cls.objetos.append(obj)
-    cls.salvar()
-
-  @classmethod
-  def listar_id(cls, id):
-    cls.abrir()
-    for c in cls.objetos:
-      if c.id == id: 
-        return c
-    return None  
-  
-  @classmethod
-  def atualizar(cls, obj):
-    c = cls.listar_id(obj.id)
+  def atualizar(self, obj):
+    c = self.listar_id(obj.id)
     if c != None:
       c.data = obj.data
       c.confirmado = obj.confirmado
       c.id_cliente = obj.id_cliente
       c.id_servico = obj.id_servico
       c.id_profissional = obj.id_profissional
-      cls.salvar()
+      self.salvar()
 
-  @classmethod
-  def excluir(cls, obj):
-    c = cls.listar_id(obj.id)
-    if c != None:
-      cls.objetos.remove(c)
-      cls.salvar()
-  
-  @classmethod
-  def listar(cls):
-    cls.abrir()
-    return cls.objetos
-  
-  @classmethod
-  def salvar(cls):
+  def salvar(self):
     with open("horarios.json", mode="w") as arquivo:   # w - write
-      json.dump(cls.objetos, arquivo, default = Horario.to_json)
+      json.dump(self.objetos, arquivo, default = Horario.to_json)
 
-  @classmethod
-  def abrir(cls):
-    cls.objetos = []
+  def abrir(self):
+    self.objetos = []
     try:
       with open("horarios.json", mode="r") as arquivo:   # r - read
         texto = json.load(arquivo)
@@ -83,7 +49,7 @@ class Horarios:
           c.id_cliente = obj["id_cliente"]
           c.id_servico = obj["id_servico"]
           c.id_profissional = obj["id_profissional"]
-          cls.objetos.append(c)
+          self.objetos.append(c)
     except FileNotFoundError:
       pass
 

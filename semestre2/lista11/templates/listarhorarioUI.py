@@ -12,7 +12,17 @@ class ListarHorarioUI:
         if len(horarios) == 0:
             st.write("Nenhum horário disponível")
         else:
+            # dic = []
+            # for obj in horarios: dic.append(obj.to_json())
+            # df = pd.DataFrame(dic)
+            # st.dataframe(df)
+
             dic = []
-            for obj in horarios: dic.append(obj.to_json())
+            for obj in horarios:
+                dic.append({
+                    "id": obj.id,
+                    "data": obj.data,
+                    "confirmado": obj.confirmado,
+                })
             df = pd.DataFrame(dic)
             st.dataframe(df)

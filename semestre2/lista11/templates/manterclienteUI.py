@@ -35,7 +35,7 @@ class ManterClienteUI:
         nome = st.text_input("Informe o nome do cliente")
         email = st.text_input("Informe o e-mail")
         fone = st.text_input("Informe o fone")
-        perfil = st.selectbox("Informe o serviço", perfis, index = None)
+        perfil = st.selectbox("Selecione o perfil", perfis, index = None)
         senha = st.text_input("Informe a senha", type="password")
         if st.button("Inserir"):
             id_perfil = None
@@ -48,6 +48,8 @@ class ManterClienteUI:
 
     def atualizar():
         clientes = View.cliente_listar()
+        perfis = View.perfil_listar()
+
         if len(clientes) == 0: 
             st.write("Nenhum cliente cadastrado")
         else:
@@ -55,9 +57,14 @@ class ManterClienteUI:
             nome = st.text_input("Informe o novo nome do cliente", op.nome)
             email = st.text_input("Informe o novo e-mail", op.email)
             fone = st.text_input("Informe o novo fone", op.fone)
+            id_perfil = None if op.id_perfil in [0, None] else op.id_perfil
+            perfil = st.selectbox("Informe o novo perfil", perfis, next((i for i, c in enumerate(perfis) if c.id == id_perfil), None))
             senha = st.text_input("Informe a nova senha", op.senha, type="password")
             if st.button("Atualizar"):
-                View.cliente_atualizar(op.id, nome, email, fone, senha)
+                id_perfil = None
+                if perfil != None: 
+                    id_perfil = perfil.id
+                View.cliente_atualizar(op.id, nome, email, fone, senha, id_perfil)
                 st.success("Cliente atualizado com sucesso")
                 time.sleep(2)
                 st.rerun()
@@ -67,7 +74,7 @@ class ManterClienteUI:
         if len(clientes) == 0: 
             st.write("Nenhum cliente cadastrado")
         else:
-            op = st.selectbox("Exclusão de cliente", clientes)
+            op = st.selectbox("Exclusão de perfil", clientes)
             if st.button("Excluir"):
                 View.cliente_excluir(op.id)
                 st.success("Cliente excluído com sucesso")
